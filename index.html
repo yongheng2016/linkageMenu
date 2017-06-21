@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>caidan</title>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		$(function (){
+		var sheng = [
+			{id: '01',name: '河南'},
+			{id: '02',name: '河北'},
+			{id: '03',name: '山东'},
+			{id: '04',name: '山西'}
+		]
+		var shi = [
+			{id: '01',names: [{id: '011',name: '郑州'},{id: '012',name: '新乡'},{id: '013',name: '开封'}]},
+			{id: '02',names: [{id: '021',name: '唐山'},{id: '022',name: '保定'},{id: '023',name: '廊坊'}]},
+			{id: '03',names: [{id: '031',name: '青岛'},{id: '032',name: '济南'},{id: '033',name: '不知道'}]},
+			{id: '04',names: [{id: '041',name: '山西1'},{id: '042',name: '山西2'},{id: '043',name: '山西3'}]}
+		]
+		var qu = [
+			{id: '011',names: [{id: '0111',name: '郑州A区'},{id: '0112',name: '郑州B区'},{id: '0113',name: '郑州C区'}]},
+			{id: '012',names: [{id: '0121',name: '郑州A区'},{id: '0122',name: '郑州B区'},{id: '0123',name: '郑州C区'}]},
+			{id: '013',names: [{id: '0131',name: '郑州A区'},{id: '0132',name: '郑州B区'},{id: '0133',name: '郑州C区'}]},
+			{id: '021',names: [{id: '0211',name: '郑州A区'},{id: '0212',name: '郑州B区'},{id: '0213',name: '郑州C区'}]},
+			{id: '022',names: [{id: '0221',name: '郑州A区'},{id: '0222',name: '郑州B区'},{id: '0223',name: '郑州C区'}]},
+			{id: '023',names: [{id: '0231',name: '郑州A区'},{id: '0232',name: '郑州B区'},{id: '0233',name: '郑州C区'}]},
+			{id: '031',names: [{id: '0311',name: '郑州A区'},{id: '0312',name: '郑州B区'},{id: '0313',name: '郑州C区'}]},
+			{id: '032',names: [{id: '0321',name: '郑州A区'},{id: '0322',name: '郑州B区'},{id: '0323',name: '郑州C区'}]},
+			{id: '033',names: [{id: '0331',name: '郑州A区'},{id: '0332',name: '郑州B区'},{id: '0333',name: '郑州C区'}]},
+		]
+			$(sheng).each(function (index,obj){
+				$('#sheng').append('<option value="'+obj.id+'">'+obj.name+'</option>')
+			})
+			menu('#sheng','#shi',shi)
+			menu('#shi','#qu',qu)
+			//多级菜单函数
+			function menu(parrentNode,childNode,childArr){
+				$(parrentNode).change(function (){
+					$(childNode)[0].length = 1;
+					var $Pid=$(this).val()
+					$(childArr).each(function (index,obj){
+						if ($Pid==obj.id){
+							$(obj.names).each(function (index,obj){
+								if (index===0){
+								$(childNode).append('<option value="'+obj.id+'" selected>'+obj.name+'</option>')
+								}
+								$(childNode).append('<option value="'+obj.id+'">'+obj.name+'</option>')
+							})
+						}
+					})
+				})				
+			}
+
+			//分开实现多级菜单
+			// $('#sheng').change(function (){
+			// 	$('#shi')[0].length = 0;
+			// 	var $sheng=$(this).val()
+			// 	$(shi).each(function (index,obj){
+			// 		if ($sheng==obj.id){
+			// 			$(obj.names).each(function (index,obj){
+			// 				$('#shi').append('<option value="'+obj.id+'">'+obj.name+'</option>')
+			// 			})
+			// 		}
+			// 	})
+			// })
+			// $('#shi').change(function (){
+			// 	$('#qu')[0].length = 0;
+			// 	var $shiId = $(this).val()
+			// 	$(qu).each(function (index,obj){
+			// 		if ($shiId == obj.id){
+			// 			$(obj.names).each(function (index,obj){
+			// 				$('#qu').append('<option value="'+obj.id+'">'+obj.name+'</option>')
+			// 			})
+			// 		}
+			// 	})
+			// })
+		})
+	</script>
+</head>
+<body>
+	<select name="" id="sheng">
+		<option>请选择</option>
+	</select>
+	<select name="" id="shi">
+		<option>请选择</option>
+	</select>
+	<select name="" id="qu">
+		<option>请选择</option>
+	</select>
+</body>
+</html>
